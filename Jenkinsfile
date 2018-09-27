@@ -5,9 +5,9 @@ properties(
         [
           $class: 'CIBuildTrigger',
           checks: [],
-          overrides: [topic: "Consumer.rh-jenkins-ci-plugin.6046262a-ae76-40a2-a577-efc648745bbc.VirtualTopic.qe.ci.>"],
+          overrides: [topic: "Consumer.rh-jenkins-ci-plugin.6046262a-ae76-40a2-a577-efc648745bbc.VirtualTopic.eng.brew.>"],
           providerName: 'Red Hat UMB',
-          selector: 'name = \'atomic-openshift\' AND CI_TYPE = \'brew-tag\' AND tag LIKE \'rhaos-%-rhel-%-candidate\''
+          selector: 'name = \'atomic-openshift\' AND type = \'Tag\' AND tag LIKE \'rhaos-%-rhel-%-candidate\''
         ]
       ]
     ),
@@ -24,7 +24,7 @@ properties(
           name: 'LIBRARIES_REPO'
         ),
         string(
-          defaultValue: 'v1.0',
+          defaultValue: 'v1.2.0',
           description: 'Git reference to the branch or tag of shared libraries.',
           name: 'LIBRARIES_REF'
         ),
@@ -91,9 +91,9 @@ library(
 
 List arches = params.ARCHES.tokenize(',')
 def errorMessages = ''
-def config = TestUtils.getProvisioningConfig(this)
+def config = API.v1.getProvisioningConfig(this)
 
-TestUtils.runParallelMultiArchTest(
+API.v1.runParallelMultiArchTest(
   this,
   arches,
   config,
