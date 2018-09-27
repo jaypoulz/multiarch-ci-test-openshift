@@ -160,17 +160,7 @@ API.v1.runParallelMultiArchTest(
             println "Failed to download and install brew build packages."
           }
         } else {
-          if (params.CI_MESSAGE != '') {
-            getRPMFromCIMessage(params.CI_MESSAGE, host.arch)
-            try {
-              sh """
-                ls *.rpm
-                sudo yum --nogpgcheck localinstall -y *.rpm
-              """
-            } catch (exc) {
-              println "No brew build packages found to install."
-            }
-          } else if (params.BUILD_NVR != '') {
+          if (params.BUILD_NVR != '') {
             try {
               sh """
                 #!/bin/sh -e
