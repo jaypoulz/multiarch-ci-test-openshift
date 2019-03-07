@@ -23,3 +23,12 @@
       chdir: verification-tests
       cmd: 'bash -lc "rvm --default use 2.3.3 && ruby tools/hack_bundle.rb"'
     become: yes
+
+  - name: copies an arch-specific geckodriver onto the execution path
+    copy:
+      src: "{{ playbook_dir }}/geckodriver-v0.24.0/{{ ansible_architecture }}/geckodriver"
+      dest: /usr/local/bin/geckodriver
+      owner: root
+      group: root
+      mode: 0751
+      become: yes
