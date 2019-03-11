@@ -26,7 +26,7 @@
 
   - name: copies an arch-specific geckodriver onto the execution path
     copy:
-      src: "{{ playbook_dir }}/bin/geckodriver-v0.24.0/{{ ansible_architecture }}/geckodriver"
+      src: "{{ playbook_dir }}/bin/geckodriver-v0.24.0/{{ ansible_architecture }}/rhel/geckodriver"
       dest: /usr/local/bin/geckodriver
       owner: root
       group: root
