@@ -11,6 +11,7 @@
       BUSHSLICER_DEBUG_AFTER_FAIL: 'false'
       BUSHSLICER_HOME: '~/bushslicer'
     output_dir: "artifacts/{{ ansible_architecture }}"
+    ENABLE_SMOKE_TESTS: true
 
   tasks:
     - file:
