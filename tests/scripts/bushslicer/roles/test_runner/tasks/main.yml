@@ -8,7 +8,7 @@
   - name: clone the repo
     git:
       repo: 'https://github.com/jaypoulz/verification-tests.git'
-      version: jaypoulz-gpg-rhel7-fix
+      version: jaypoulz-gpg-rhel7-fix-minimal
       dest: verification-tests
 
   - name: install OS dependencies
