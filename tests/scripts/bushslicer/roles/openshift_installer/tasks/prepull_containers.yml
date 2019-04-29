@@ -1,0 +1,44 @@
+---
+- name: pull maven agent image for jenkins
+  docker_image:
+    name: "{{ INSECURE_REGISTRY_HOSTNAME }}:{{ INSECURE_REGISTRY_PORT }}/openshift3/jenkins-agent-maven-35-rhel7:{{ OPENSHIFT_RELEASE_TAG }}"
+
+- name: pull nodejs agent image for jenkins
+  docker_image:
+    name: "{{ INSECURE_REGISTRY_HOSTNAME }}:{{ INSECURE_REGISTRY_PORT }}/openshift3/jenkins-agent-nodejs-8-rhel7:{{ OPENSHIFT_RELEASE_TAG }}"
+
+- name: pull ose ansible image
+  docker_image:
+    name: "{{ INSECURE_REGISTRY_HOSTNAME }}:{{ INSECURE_REGISTRY_PORT }}/openshift3/ose-ansible:{{ OPENSHIFT_RELEASE_TAG }}"
+
+- name: pull jenkins image
+  docker_image:
+    name: "{{ INSECURE_REGISTRY_HOSTNAME }}:{{ INSECURE_REGISTRY_PORT }}/openshift3/jenkins-2-rhel7:{{ OPENSHIFT_RELEASE_TAG }}"
+
+- name: pull jenkins slave base image
+  docker_image:
+    name: "{{ INSECURE_REGISTRY_HOSTNAME }}:{{ INSECURE_REGISTRY_PORT }}/openshift3/jenkins-slave-base-rhel7:{{ OPENSHIFT_RELEASE_TAG }}"
+
+- name: pull jenkins slave base image
+  docker_image:
+    name: "{{ INSECURE_REGISTRY_HOSTNAME }}:{{ INSECURE_REGISTRY_PORT }}/openshift3/jenkins-slave-base-rhel7:{{ OPENSHIFT_RELEASE_TAG }}"
+
+- name: pull ose deployer image
+  docker_image:
+    name: "{{ INSECURE_REGISTRY_HOSTNAME }}:{{ INSECURE_REGISTRY_PORT }}/openshift3/ose-deployer:{{ OPENSHIFT_RELEASE_TAG }}"
+
+- name: pull ose docker registry image
+  docker_image:
+    name: "{{ INSECURE_REGISTRY_HOSTNAME }}:{{ INSECURE_REGISTRY_PORT }}/openshift3/ose-docker-registry:{{ OPENSHIFT_RELEASE_TAG }}"
+
+- name: pull ose pod image
+  docker_image:
+    name: "{{ INSECURE_REGISTRY_HOSTNAME }}:{{ INSECURE_REGISTRY_PORT }}/openshift3/ose-pod:{{ OPENSHIFT_RELEASE_TAG }}"
+
+- name: pull ose haproxy router image
+  docker_image:
+    name: "{{ INSECURE_REGISTRY_HOSTNAME }}:{{ INSECURE_REGISTRY_PORT }}/openshift3/ose-haproxy-router:{{ OPENSHIFT_RELEASE_TAG }}"
+
+- name: pull registry console image
+  docker_image:
+    name: "{{ INSECURE_REGISTRY_HOSTNAME }}:{{ INSECURE_REGISTRY_PORT }}/openshift3/registry-console:{{ OPENSHIFT_RELEASE_TAG }}"

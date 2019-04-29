@@ -6,8 +6,12 @@
       baseurl: "{{ BASE_REPO_URL }}/ose/{{ OPENSHIFT_VERSION }}/os/"
     become: yes
 
+  - name: pre-import containers
+    import_tasks: prepull_containers.yml
+    when: "{{ IMPORT_CONTAINERS }}"
+
   - name: install openshift rpm
     yum:
-      name: openshift-ansible-{{ OPENSHIFT_RELEASE }}
+      name: openshift-ansible{{ (IMPORT_CONTAINERS) | ternary('-' + OPENSHIFT_RELEASE, '') }}
       state: latest
     become: yes
