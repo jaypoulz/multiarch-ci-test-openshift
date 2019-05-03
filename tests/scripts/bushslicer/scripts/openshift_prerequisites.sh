@@ -25,7 +25,8 @@ rpm --import https://www.redhat.com/security/data/fd431d51.txt
 yum-config-manager --add-repo http://pulp.dist.prod.ext.phx2.redhat.com/content/dist/rhel/$basedir/7/7Server/$arch/os/ &&
 yum-config-manager --add-repo http://pulp.dist.prod.ext.phx2.redhat.com/content/dist/rhel/$basedir/7/7Server/$arch/optional/os/ &&
 yum-config-manager --add-repo http://pulp.dist.prod.ext.phx2.redhat.com/content/dist/rhel/$basedir/7/7Server/$arch/extras/os/ &&
-yum-config-manager --add-repo http://pulp.dist.prod.ext.phx2.redhat.com/content/dist/rhel/$basedir/7/7Server/$arch/ansible/2/os/
+yum-config-manager --add-repo http://pulp.dist.prod.ext.phx2.redhat.com/content/dist/rhel/$basedir/7/7Server/$arch/ansible/2/os/ &&
+yum-config-manager --add-repo http://pulp.dist.prod.ext.phx2.redhat.com/content/dist/rhel/$basedir/7/7Server/$arch/rhscl/1/os/
 
 # Install Ansible
 yum install -y ansible

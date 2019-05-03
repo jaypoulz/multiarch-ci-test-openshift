@@ -7,7 +7,7 @@
 
 - name: install pre-req packages
   yum:
-    name: 'wget, yum-utils, python-docker-py, iptables-services, skopeo, dnsmasq, conntrack-tools, docker'
+    name: 'wget, yum-utils, python-docker-py, iptables-services, skopeo, dnsmasq, conntrack-tools, docker, rh-git29'
     state: latest
   become: yes
 
