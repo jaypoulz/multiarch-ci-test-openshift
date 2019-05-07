@@ -25,7 +25,6 @@
       authorized_key: user=test key="{{item}}"
       with_file:
         - /home/jenkins/.ssh/id_rsa.pub
-      - debug: msg="{{ playbook_dir }}"
 
     - name: Replace the default remote user to test
       lineinfile:
