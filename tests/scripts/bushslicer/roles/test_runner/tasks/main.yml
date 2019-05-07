@@ -21,7 +21,7 @@
   - name: installs modules based on the contents of bushslicer/Gemfile
     shell:
       chdir: verification-tests
-      cmd: 'bash -lc "rvm --default use 2.4 && ruby tools/hack_bundle.rb && gem install rails -v 5.0"'
+      cmd: 'bash -lc "ruby tools/hack_bundle.rb"'
     become: yes
 
   - name: copies an arch-specific geckodriver onto the execution path

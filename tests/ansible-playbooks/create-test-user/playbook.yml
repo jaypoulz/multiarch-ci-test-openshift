@@ -1,0 +1,34 @@
+---
+- name:  Host Summary
+  hosts: all
+  gather_facts: true
+
+  tasks:
+    - name: Make sure we have a 'wheel' group
+      group:
+        name: wheel
+        state: present
+
+    - name: Allow 'wheel' group to have passwordless sudo
+      lineinfile:
+        dest: /etc/sudoers
+        state: present
+        regexp: '^%wheel'
+        line: '%wheel ALL=(ALL) NOPASSWD: ALL'
+        validate: 'visudo -cf %s'
+
+    - name: Add sudoers users to wheel group
+      user: name=test groups=wheel append=yes state=present createhome=yes
+
+
+    - name: Set up authorized keys for the test user
+      authorized_key: user=test key="{{item}}"
+      with_file:
+        - /home/jenkins/.ssh/id_rsa.pub
+      - debug: msg="{{ playbook_dir }}"
+
+    - name: Replace the default remote user to test
+      lineinfile:
+        path: "{{ inventory_dir }}/group_vars/all.yml"
+        regexp: '^ansible_user:.*$'
+        line: 'ansible_user: test'
