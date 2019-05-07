@@ -27,7 +27,8 @@
         - /home/jenkins/.ssh/id_rsa.pub
 
     - name: Replace the default remote user to test
-      lineinfile:
+      local_action:
+        module: lineinfile
         path: "{{ inventory_dir }}/group_vars/all.yml"
         regexp: '^ansible_user:.*$'
         line: 'ansible_user: test'
