@@ -8,7 +8,7 @@
 
   - name: pre-import containers
     import_tasks: prepull_containers.yml
-    when: "{{ IMPORT_CONTAINERS }}"
+    when: IMPORT_CONTAINERS
 
   - name: install openshift rpm
     yum:
