@@ -26,12 +26,12 @@ properties(
          regex: '^(?:x86_64|ppc64le|aarch64|s390x)(?:,\\s*(?:x86_64|ppc64le|aarch64|s390x))*$'
         ],
         string(
-          defaultValue: 'https://github.com/redhat-multiarch-qe/multiarch-ci-libraries',
+          defaultValue: 'https://github.com/jaypoulz/multiarch-ci-libraries',
           description: 'Repo for shared libraries.',
           name: 'LIBRARIES_REPO'
         ),
         string(
-          defaultValue: 'v1.2.2',
+          defaultValue: 'dev-v2.0.0',
           description: 'Git reference to the branch or tag of shared libraries.',
           name: 'LIBRARIES_REF'
         ),
