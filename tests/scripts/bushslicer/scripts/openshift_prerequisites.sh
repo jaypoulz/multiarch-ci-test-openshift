@@ -35,4 +35,4 @@ echo -e "\n\n\nPLAYBOOK START :: INSTALL & CONFIGURE OPENSHIFT INSTALLER\n\n\n" 
     ansible-playbook -i localhost.inventory configure-openshift.yml &&
 
 echo -e "\n\n\nPLAYBOOK START :: INSTALL PREREQUISITES\n\n\n" &&
-    ansible-playbook -i artifacts/host.inventory /usr/share/ansible/openshift-ansible/playbooks/prerequisites.yml
+    sudo ansible-playbook -i artifacts/host.inventory /usr/share/ansible/openshift-ansible/playbooks/prerequisites.yml
