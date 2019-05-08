@@ -17,9 +17,8 @@
         line: '%wheel ALL=(ALL) NOPASSWD: ALL'
         validate: 'visudo -cf %s'
 
-    - name: Add sudoers users to wheel group
-      user: name=test groups=wheel append=yes state=present createhome=yes
-
+    - name: Create test user in the wheel and docker groups
+      user: name=test groups=wheel,docker append=yes state=present createhome=yes
 
     - name: Set up authorized keys for the test user
       authorized_key: user=test key="{{item}}"
