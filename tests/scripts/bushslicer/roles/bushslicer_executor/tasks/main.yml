@@ -22,7 +22,6 @@
     shell:
       chdir: verification-tests
       cmd: 'bash -lc "ruby tools/hack_bundle.rb"'
-    become: yes
 
   - name: copies an arch-specific geckodriver onto the execution path
     copy:
@@ -30,5 +29,5 @@
       dest: /usr/local/bin/geckodriver
       owner: root
       group: root
-      mode: 0751
+      mode: 0755
     become: yes

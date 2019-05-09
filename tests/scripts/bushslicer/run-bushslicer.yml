@@ -20,7 +20,7 @@
         mode: 0755
         recurse: true
 
-    - shell: "scl enable rh-git29 -- cucumber -p junit features/cli/create.feature -o ../{{ output_dir }}/cli_create-feature.txt"
+    - shell: "bash -lc \"scl enable rh-git29 -- cucumber -p junit features/cli/create.feature -o ../{{ output_dir }}/cli_create-feature.txt\""
       args:
         chdir: verification-tests
         executable: /bin/bash
@@ -28,7 +28,7 @@
       ignore_errors: yes
       environment: "{{ bushslicer_env }}"
 
-    - shell: "scl enable rh-git29 -- cucumber -p junit features/web/build.feature -o ../{{ output_dir }}/web_build-feature.txt"
+    - shell: "bash -lc \"scl enable rh-git29 -- cucumber -p junit features/web/build.feature -o ../{{ output_dir }}/web_build-feature.txt\""
       args:
         chdir: verification-tests
         executable: /bin/bash
@@ -36,7 +36,7 @@
       ignore_errors: yes
       environment: "{{ bushslicer_env }}"
 
-    - shell: "scl enable rh-git29 -- cucumber -p junit --tags @smoke -o ../{{ output_dir }}/smoke-feature.txt"
+    - shell: "bash -lc \"scl enable rh-git29 -- cucumber -p junit --tags @smoke -o ../{{ output_dir }}/smoke-feature.txt\""
       args:
         chdir: verification-tests
         executable: /bin/bash
