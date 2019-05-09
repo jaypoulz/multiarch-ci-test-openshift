@@ -18,6 +18,13 @@
     ignore_errors: yes
     become: yes
 
+  - name: add the test user to the rvm group
+    user:
+      name: test
+      groups: rvm
+      append: yes
+      present: yes
+
   - name: installs modules based on the contents of bushslicer/Gemfile
     shell:
       chdir: verification-tests
