@@ -56,21 +56,6 @@ properties(
           name: 'CI_MESSAGE'
         ),
         string(
-          name: 'ORIGIN_REPO',
-          description: 'Origin repo',
-          defaultValue: 'https://github.com/openshift/origin.git'
-        ),
-        string(
-          name: 'ORIGIN_BRANCH',
-          description: 'Origin branch',
-          defaultValue: 'master'
-        ),
-        string(
-          name: 'OS_BUILD_ENV_IMAGE',
-          description: 'openshift-release image',
-          defaultValue: 'openshiftmultiarch/origin-release:golang-1.8'
-        ),
-        string(
           defaultValue: '',
           description: 'Build NVR for which to run the pipeline',
           name: 'BUILD_NVR'
@@ -79,11 +64,6 @@ properties(
           defaultValue: '',
           description: 'Build task ID for which to run the pipeline',
           name: 'TASK_ID'
-        ),
-        booleanParam(
-          name: 'USE_CTR',
-          defaultValue: true,
-          description: 'Switch between using createTaskRepo plugin (default) or brew/koji method to retrieve packages of a build.'
         )
       ]
     )
