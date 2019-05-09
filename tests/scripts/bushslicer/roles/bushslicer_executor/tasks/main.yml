@@ -23,6 +23,7 @@
       name: test
       groups: rvm
       append: yes
+    become: yes
 
   - name: installs modules based on the contents of bushslicer/Gemfile
     shell:
