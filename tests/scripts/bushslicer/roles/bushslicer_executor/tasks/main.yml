@@ -29,6 +29,7 @@
     shell:
       chdir: verification-tests
       cmd: 'bash -lc "ruby tools/hack_bundle.rb"'
+    become: yes
 
   - name: copies an arch-specific geckodriver onto the execution path
     copy:
