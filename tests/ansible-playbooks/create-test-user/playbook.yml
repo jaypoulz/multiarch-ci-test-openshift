@@ -30,6 +30,17 @@
       with_file:
         - /home/jenkins/.ssh/id_rsa.pub
 
+    - name: Create keypair so that test user can use passwordless SSH as root
+      openssh_keypair:
+        path: /home/test/.ssh/id_rsa
+
+    - name: Allow test user to ssh as root
+      authorized_key:
+        user: root
+        state: present
+        key: "{{ lookup('file', '/home/test/.ssh/id_rsa.pub') }}"
+      become: yes
+
     - name: Replace the default remote user to test
       local_action:
         module: lineinfile
