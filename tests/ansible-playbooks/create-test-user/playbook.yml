@@ -42,12 +42,13 @@
         path: /home/test/.ssh/id_rsa
         owner: test
         group: test
+      register: keypair
 
     - name: Allow test user to ssh as root
       authorized_key:
         user: root
         state: present
-        key: "{{ lookup('file', '/home/test/.ssh/id_rsa.pub') }}"
+        key: "{{ keypair.public_key }}"
       become: yes
 
     - name: Replace the default remote user to test
