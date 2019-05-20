@@ -10,7 +10,7 @@
       OPENSHIFT_ENV_ORIGIN_HOSTS: 'localhost:8443:etcd:master:node'
       BUSHSLICER_DEBUG_AFTER_FAIL: 'false'
       BUSHSLICER_HOME: '~/bushslicer'
-    output_dir: "artifacts/{{ ansible_architecture }}"
+    output_dir: "reports/{{ ansible_architecture }}"
     ENABLE_SMOKE_TESTS: true
 
   tasks:
@@ -20,27 +20,27 @@
         mode: 0755
         recurse: true
 
-    - shell: "bash -lc \"scl enable rh-git29 -- cucumber -p junit features/cli/create.feature -o ../{{ output_dir }}/cli_create-feature.txt\""
+    - shell: "bash -lc \"scl enable rh-git29 -- cucumber -p junit --format junit features/cli/create.feature -o ../{{ output_dir }}/cli_create-feature.xml\""
       args:
         chdir: verification-tests
         executable: /bin/bash
-        creates: "{{ output_dir }}/cli_create-feature.txt"
+        creates: "{{ output_dir }}/cli_create-feature.xml"
       ignore_errors: yes
       environment: "{{ bushslicer_env }}"
 
-    - shell: "bash -lc \"scl enable rh-git29 -- cucumber -p junit features/web/build.feature -o ../{{ output_dir }}/web_build-feature.txt\""
+    - shell: "bash -lc \"scl enable rh-git29 -- cucumber -p junit --format junit features/web/build.feature -o ../{{ output_dir }}/web_build-feature.xml\""
       args:
         chdir: verification-tests
         executable: /bin/bash
-        creates: "{{ output_dir }}/web_build-feature.txt"
+        creates: "{{ output_dir }}/web_build-feature.xml"
       ignore_errors: yes
       environment: "{{ bushslicer_env }}"
 
-    - shell: "bash -lc \"scl enable rh-git29 -- cucumber -p junit --tags @smoke -o ../{{ output_dir }}/smoke-feature.txt\""
+    - shell: "bash -lc \"scl enable rh-git29 -- cucumber -p junit --tags @smoke --format junit -o ../{{ output_dir }}/smoke-feature.xml\""
       args:
         chdir: verification-tests
         executable: /bin/bash
-        creates: "{{ output_dir }}/smoke-tests.txt"
+        creates: "{{ output_dir }}/smoke-tests.xml"
       when: ENABLE_SMOKE_TESTS is defined
       ignore_errors: yes
       environment: "{{ bushslicer_env }}"
