@@ -25,11 +25,11 @@ sudo rpm --import https://www.redhat.com/security/data/fd431d51.txt
 sudo yum-config-manager --add-repo http://pulp.dist.prod.ext.phx2.redhat.com/content/dist/rhel/$basedir/7/7Server/$arch/os/ &&
 sudo yum-config-manager --add-repo http://pulp.dist.prod.ext.phx2.redhat.com/content/dist/rhel/$basedir/7/7Server/$arch/optional/os/ &&
 sudo yum-config-manager --add-repo http://pulp.dist.prod.ext.phx2.redhat.com/content/dist/rhel/$basedir/7/7Server/$arch/extras/os/ &&
-sudo yum-config-manager --add-repo http://pulp.dist.prod.ext.phx2.redhat.com/content/dist/rhel/$basedir/7/7Server/$arch/ansible/2/os/ &&
+sudo yum-config-manager --add-repo http://pulp.dist.prod.ext.phx2.redhat.com/content/dist/rhel/$basedir/7/7Server/$arch/ansible/2.6/os/ &&
 sudo yum-config-manager --add-repo http://pulp.dist.prod.ext.phx2.redhat.com/content/dist/rhel/$basedir/7/7Server/$arch/rhscl/1/os/
 
 # Install Ansible
-sudo yum downgrade -y ansible-2.7.10
+sudo yum install -y ansible
 
 echo -e "\n\n\nPLAYBOOK START :: INSTALL & CONFIGURE OPENSHIFT INSTALLER\n\n\n" &&
     ansible-playbook -i localhost.inventory configure-openshift.yml &&
