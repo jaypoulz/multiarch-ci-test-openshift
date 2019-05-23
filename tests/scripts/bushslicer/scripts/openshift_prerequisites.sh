@@ -29,7 +29,7 @@ sudo yum-config-manager --add-repo http://pulp.dist.prod.ext.phx2.redhat.com/con
 sudo yum-config-manager --add-repo http://pulp.dist.prod.ext.phx2.redhat.com/content/dist/rhel/$basedir/7/7Server/$arch/rhscl/1/os/
 
 # Install Ansible
-sudo yum install -y ansible
+sudo yum downgrade -y ansible-2.7.10
 
 echo -e "\n\n\nPLAYBOOK START :: INSTALL & CONFIGURE OPENSHIFT INSTALLER\n\n\n" &&
     ansible-playbook -i localhost.inventory configure-openshift.yml &&
