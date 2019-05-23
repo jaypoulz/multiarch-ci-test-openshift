@@ -80,7 +80,7 @@ List arches = params.ARCHES.tokenize(',')
 def errorMessages = ''
 def config = MAQEAPI.v1.getProvisioningConfig(this)
 config.jobgroup = 'multiarch-qe'
-config.teardown = false
+//config.teardown = false
 
 MAQEAPI.v1.runParallelMultiArchTest(
   this,
