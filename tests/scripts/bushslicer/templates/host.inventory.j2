@@ -9,7 +9,7 @@ openshift_deployment_type='openshift-enterprise'
 openshift_portal_net=172.30.0.0/16
 openshift_master_default_subdomain="{{ ansible_default_ipv4.address }}.xip.io"
 #openshift_enable_olm=true
-os_sdn_network_plugin_name='redhat/openshift-multiarch-multitenant'
+os_sdn_network_plugin_name='redhat/openshift-ovs-multitenant'
 os_firewall_use_firewalld=True
 openshift_disable_check=package_version,disk_availability,docker_storage,memory_availability
 openshift_image_tag={{ OPENSHIFT_RELEASE_TAG }}
@@ -47,10 +47,10 @@ openshift_cluster_monitoring_operator_install=false
 #openshift_logging_es_nodeselector={"node-role.kubernetes.io/infra":"true"}
 
 [masters]
-{{ ansible_hostname }} ansible_connection=local
+{{ ansible_fqdn }} ansible_connection=local
 
 [etcd]
-{{ ansible_hostname }} ansible_connection=local
+{{ ansible_fqdn }} ansible_connection=local
 
 [nodes]
-{{ ansible_hostname }} ansible_connection=local openshift_node_group_name="node-config-all-in-one"
+{{ ansible_fqdn }} ansible_connection=local openshift_node_group_name="node-config-all-in-one"
