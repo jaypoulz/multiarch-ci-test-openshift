@@ -4,40 +4,53 @@ nodes
 etcd
 
 [OSEv3:vars]
+# Cluster Configuration
 openshift_deployment_type='openshift-enterprise'
 openshift_portal_net=172.30.0.0/16
-
-ansible_user=root
-
+openshift_master_default_subdomain="{{ ansible_default_ipv4.address }}.xip.io"
+#openshift_enable_olm=true
+os_sdn_network_plugin_name='redhat/openshift-multiarch-multitenant'
+os_firewall_use_firewalld=True
 openshift_disable_check=package_version,disk_availability,docker_storage,memory_availability
+openshift_image_tag={{ OPENSHIFT_RELEASE_TAG }}
+openshift_release={{ OPENSHIFT_RELEASE }}
+ansible_user=root
+debug_level=5
 
+# Registry & Images
 openshift_docker_insecure_registries="{{ INSECURE_REGISTRY_URL }}"
-oreg_url="{{ INSECURE_REGISTRY_URL }}/openshift3/ose-${component}:${version}"
-
 openshift_cockpit_deployer_image="{{ INSECURE_REGISTRY_URL }}/openshift3/registry-console:{{ OPENSHIFT_RELEASE_TAG }}"
-
 openshift_service_catalog_image_prefix="{{ INSECURE_REGISTRY_URL }}/openshift3/ose-"
 ansible_service_broker_image_prefix="{{ INSECURE_REGISTRY_URL }}/openshift3/ose-"
 template_service_broker_prefix="{{ INSECURE_REGISTRY_URL }}/openshift3/ose-"
 openshift_web_console_image="{{ INSECURE_REGISTRY_URL }}/openshift3/ose-web-console:{{ OPENSHIFT_RELEASE_TAG }}"
-
 osm_etcd_image='registry.access.redhat.com/rhel7/etcd:3.2.22'
 
-#things that don't work on ppc yet
-#openshift_cluster_monitoring_operator_install=false
-#openshift_console_install=false
+# Registry Auth
+oreg_url="{{ INSECURE_REGISTRY_URL }}/openshift3/ose-${component}:${version}"
+#oreg_auth_user=
+#oreg_auth_password=
 
+# Cluster Auth
 openshift_master_identity_providers=[{'name': 'allow_all', 'login': 'true', 'challenge': 'true', 'kind': 'AllowAllPasswordIdentityProvider'}]
 openshift_auth_type=allowall
+#openshift_master_identity_providers=[{'name': 'htpasswd_auth', 'login': 'true', 'challenge': 'true', 'kind': 'HTPasswdPasswordIdentityProvider'}]
+#openshift_master_htpasswd_users={'system': 'system', 'developer': 'developer'}
 
-openshift_release={{ OPENSHIFT_RELEASE }}
-debug_level=5
+# Optional Features
+openshift_cluster_monitoring_operator_install=false
+#openshift_console_install=false
+#openshift_use_crio=true
+#openshift_use_crio_only=true
+#openshift_logging_install_logging=true
+#openshift_logging_es_ops_nodeselector={"node-role.kubernetes.io/infra":"true"}
+#openshift_logging_es_nodeselector={"node-role.kubernetes.io/infra":"true"}
 
 [masters]
-localhost ansible_connection=local
+{{ ansible_hostname }} ansible_connection=local
 
 [etcd]
-localhost ansible_connection=local
+{{ ansible_hostname }} ansible_connection=local
 
 [nodes]
-localhost ansible_connection=local openshift_node_group_name="node-config-all-in-one"
+{{ ansible_hostname }} ansible_connection=local openshift_node_group_name="node-config-all-in-one"
