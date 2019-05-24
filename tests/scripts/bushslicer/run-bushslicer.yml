@@ -24,7 +24,6 @@
       args:
         chdir: verification-tests
         executable: /bin/bash
-        creates: "{{ output_dir }}/cli_create-feature.xml"
       ignore_errors: yes
       environment: "{{ bushslicer_env }}"
 
@@ -32,7 +31,6 @@
       args:
         chdir: verification-tests
         executable: /bin/bash
-        creates: "{{ output_dir }}/web_build-feature.xml"
       ignore_errors: yes
       environment: "{{ bushslicer_env }}"
 
@@ -40,7 +38,6 @@
       args:
         chdir: verification-tests
         executable: /bin/bash
-        creates: "{{ output_dir }}/smoke-tests.xml"
       when: ENABLE_SMOKE_TESTS is defined
       ignore_errors: yes
       environment: "{{ bushslicer_env }}"

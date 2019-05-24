@@ -51,9 +51,24 @@
         key: "{{ keypair.public_key }}"
       become: yes
 
-    - name: Replace the default remote user to test
-      local_action:
-        module: lineinfile
-        path: "{{ inventory_dir }}/group_vars/all.yml"
-        regexp: '^ansible_user:.*$'
-        line: 'ansible_user: test'
+    - name: Create keypair so that root user can use passwordless SSH as itself
+      openssh_keypair:
+        path: /root/.ssh/id_rsa
+        owner: root
+        group: root
+      become: yes
+      register: keypair
+
+    - name: Allow root user to ssh as root
+      authorized_key:
+        user: root
+        state: present
+        key: "{{ keypair.public_key }}"
+      become: yes
+
+#    - name: Replace the default remote user to test
+#      local_action:
+#        module: lineinfile
+#        path: "{{ inventory_dir }}/group_vars/all.yml"
+#        regexp: '^ansible_user:.*$'
+#        line: 'ansible_user: test'
